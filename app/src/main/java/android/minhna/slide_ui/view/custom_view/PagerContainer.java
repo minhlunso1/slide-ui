@@ -3,6 +3,7 @@ package android.minhna.slide_ui.view.custom_view;
 import android.content.Context;
 import android.graphics.Point;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,8 +19,17 @@ public class PagerContainer extends FrameLayout implements ViewPager.OnPageChang
     private Point pointCenter = new Point();
     private Point pointTouch = new Point();
 
+    //require these contructor to generate view from xml
     public PagerContainer(Context context) {
         super(context);
+        init();
+    }
+    public PagerContainer(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+    public PagerContainer(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
         init();
     }
 

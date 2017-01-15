@@ -3,4 +3,7 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="demo_title">Made with Android SDK</string>
+    <string name="demo_content">Please pay me as high as you can.\nIt"'"s worthy :)\n\n"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</string>
+    <string name="author_name">Minh Nguyen</string>
 </resources>

@@ -2,23 +2,26 @@ package android.minhna.slide_ui.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.PagerAdapter;
-import android.view.Gravity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 /**
  * Created by Minh on 1/15/2017.
  */
 
+//just for quick demo. In reality, do not do this :)
 public class ImageAdapter extends PagerAdapter {
 
     private Context context;
 
     @Override
     public int getCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -33,13 +36,25 @@ public class ImageAdapter extends PagerAdapter {
     //instantiateItem - destroyItem (pair)
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        TextView view = new TextView(context);
-        view.setText("Item "+position);
-        view.setGravity(Gravity.CENTER);
-        view.setBackgroundColor(Color.argb(255, position * 50, position * 10, position * 50));
+        position++;
+        String uri = "@drawable/img_"+position;
+        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
+        Drawable res = context.getResources().getDrawable(imageResource, null);
 
-        container.addView(view);
-        return view;
+        ImageView view = new ImageView(context);
+        view.setImageDrawable(res);
+        view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        CardView cardView = new CardView(context);
+        cardView.setRadius(10);
+        cardView.setContentPadding(15, 15, 15, 15);
+        cardView.setBackgroundColor(Color.parseColor("#8CFF4081"));
+        cardView.setMaxCardElevation(15);
+        cardView.setCardElevation(9);
+
+        cardView.addView(view);
+        container.addView(cardView);
+        return cardView;
     }
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
