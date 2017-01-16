@@ -24,7 +24,7 @@ public class ImageItemAdapter extends RecyclerView.Adapter<ImageItemAdapter.Imag
     onItemAction actionListener;
 
     public interface onItemAction {
-        public void onItemClick(int index);
+        public void onItemClick(int index, ImageView img);
     }
 
     public ImageItemAdapter(Context context, List<ImageItem> data) {
@@ -62,7 +62,7 @@ public class ImageItemAdapter extends RecyclerView.Adapter<ImageItemAdapter.Imag
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    actionListener.onItemClick(getLayoutPosition());
+                    actionListener.onItemClick(getLayoutPosition(), imageView);
                 }
             });
 

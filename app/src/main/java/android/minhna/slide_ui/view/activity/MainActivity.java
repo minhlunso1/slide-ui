@@ -1,25 +1,30 @@
 package android.minhna.slide_ui.view.activity;
 
+import android.content.Intent;
 import android.minhna.slide_ui.R;
 import android.minhna.slide_ui.adapter.ImageItemAdapter;
 import android.minhna.slide_ui.model.ImageItem;
-import android.minhna.slide_ui.view.fragment.SlideFragment;
+import android.minhna.slide_ui.util.MyUtils;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.ImageView;
 
 /**
  * Created by Minh on 1/12/2017.
  */
 
 public class MainActivity extends AppCompatActivity implements ImageItemAdapter.onItemAction {
-    
+
+    int SLIDE_REQ = 0;
     RecyclerView rv;
-    SlideFragment fragment;
+    View bg;
+//    SlideFragment fragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,9 +32,8 @@ public class MainActivity extends AppCompatActivity implements ImageItemAdapter.
         hideBars();
         setContentView(R.layout.activity_main);
         rv = (RecyclerView) findViewById(R.id.rv);
+        bg = findViewById(R.id.bg);
         buildListView();
-
-
     }
 
     @Override
@@ -62,22 +66,37 @@ public class MainActivity extends AppCompatActivity implements ImageItemAdapter.
     }
 
     @Override
-    public void onItemClick(int index) {
-        rv.setVisibility(View.GONE);
-        FragmentManager fm = getSupportFragmentManager();
-        fragment = SlideFragment.newInstance(index);
-        fm.beginTransaction().add(R.id.content, fragment)
-                .addToBackStack(SlideFragment.class.getName())
-                .commit();
+    public void onItemClick(int index, ImageView img) {
+//        FragmentManager fm = getSupportFragmentManager();
+//        fragment = SlideFragment.newInstance(index);
+//        fm.beginTransaction().add(R.id.content, fragment)
+//                .addToBackStack(SlideFragment.class.getName())
+//                .commit();
+        Intent intent = new Intent(this, SlideActivity.class);
+        intent.putExtra("index", index);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, img, "img");
+        startActivityForResult(intent, SLIDE_REQ, options.toBundle());
     }
 
     @Override
     public void onBackPressed() {
-        FragmentManager fm = getSupportFragmentManager();
-        if (fm.getBackStackEntryCount() > 0) {
-            fm.popBackStackImmediate();
-            rv.setVisibility(View.VISIBLE);
-        } else
-            super.onBackPressed();
+        supportFinishAfterTransition();
+//        FragmentManager fm = getSupportFragmentManager();
+//        if (fm.getBackStackEntryCount() > 0) {
+//            fm.popBackStackImmediate();
+//            rv.setVisibility(View.VISIBLE);
+//        } else
+//            super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SLIDE_REQ) {
+            if (resultCode == AppCompatActivity.RESULT_OK) {
+                int colorId = data.getIntExtra("bg_color", R.color.white_overlay);
+                bg.setBackgroundColor(ContextCompat.getColor(this, colorId));
+            }
+        }
     }
 }

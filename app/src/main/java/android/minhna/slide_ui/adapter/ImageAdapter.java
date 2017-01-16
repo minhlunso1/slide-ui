@@ -46,9 +46,9 @@ public class ImageAdapter extends PagerAdapter {
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         CardView cardView = new CardView(context);
-        cardView.setRadius(10);
+        cardView.setRadius(5);
         cardView.setContentPadding(15, 15, 15, 15);
-        cardView.setBackgroundColor(Color.parseColor("#8CFF4081"));
+        cardView.setBackgroundColor(Color.parseColor("#ededed"));
         cardView.setMaxCardElevation(15);
         cardView.setCardElevation(9);
 

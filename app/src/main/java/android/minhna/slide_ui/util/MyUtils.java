@@ -6,9 +6,12 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.minhna.slide_ui.R;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by Administrator on 16-Jan-17.
@@ -66,6 +69,18 @@ public class MyUtils {
         view.layout(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
         view.draw(c);
         return bitmap;
+    }
+
+    public static int getColorByName(String name) {
+        int colorId = 0;
+        try {
+            Class res = R.color.class;
+            Field field = res.getField( name );
+            colorId = field.getInt(null);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+        return colorId;
     }
 
 }

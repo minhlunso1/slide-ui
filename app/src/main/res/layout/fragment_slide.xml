@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:background="@drawable/bg_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_overlay"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
-                        android:paddingEnd="10dp"
+                        android:layout_marginEnd="15dp"
                         android:text="@string/author_name"
                         android:textSize="13sp"
                         android:textColor="@color/colorAccent"/>
@@ -68,6 +74,7 @@
             android:elevation="10dp">
             <android.support.v4.view.ViewPager
                 android:id="@+id/vp"
+                android:transitionName="img"
                 android:layout_width="240dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"/>
