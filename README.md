@@ -15,6 +15,5 @@ Only made with Android SDK provided by Google.
 Please run on real devices to enjoy real performance.
 
 ## Walkthrough
-<div style='text-align:center;'>
   ![screenshot](slide.gif)
-</div>
+
